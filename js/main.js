@@ -4,26 +4,21 @@ const stylePoints = document.querySelectorAll('.point')
 const images = document.querySelectorAll('.img-slider')
 
 
-point.forEach((item, index) => {
-  item.addEventListener('click', () => {
+point.forEach((point, index) => {
+  point.addEventListener('click', () => {
 
-    images[0].style.opacity = '0'
-    images[1].style.opacity = '0'
-    images[2].style.opacity = '0'
-    images[3].style.opacity = '0'
+    images.forEach(image => image.classList.remove('active-img-slider'))
+    images[index].classList.add('active-img-slider')
 
-    images[index].style.opacity = '1'
+    images.forEach(image => image.classList.remove('active-img-slider'))
+    images[index].classList.add('active-img-slider')
 
-    stylePoints[0].classList.remove('active-point')
-    stylePoints[1].classList.remove('active-point')
-    stylePoints[2].classList.remove('active-point')
-    stylePoints[3].classList.remove('active-point')
-
+    stylePoints.forEach(point => point.classList.remove('active-point'))
     stylePoints[index].classList.add('active-point')
-
   })
 })
 
+point[0].click();
 
 let music = document.querySelector("audio");
 music.volume = 0.6;
@@ -33,12 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var tl = gsap.timeline()
 
   tl
-    .from('.bg-slider', {
-      duration: 1,
-      opacity: 0,
-      stagger: { each: 0.1 },
-      ease: 'power4.out',
-    }, '-=1.0')
     .from('nav div', {
       duration: 2,
       opacity: 0,
